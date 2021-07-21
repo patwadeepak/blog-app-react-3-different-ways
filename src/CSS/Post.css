@@ -1,0 +1,13 @@
+.post-title {
+  font-size: x-large;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  padding: 20px;
+}
+
+.post-body {
+  font-family: cursive;
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
