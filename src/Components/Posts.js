@@ -1,11 +1,16 @@
 import "../CSS/Post.css";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { AppContext } from "../App";
 
-const Posts = ({ setPostData, PostData }) => {
+const Posts = () => {
+  const [state, dispatch] = useContext(AppContext);
+
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
+    fetch("http://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
-      .then((data) => setPostData(data));
+      .then((posts) => {
+        dispatch({ type: "FETCH_POSTS", payload: posts });
+      });
   }, []);
 
   return (
@@ -13,7 +18,7 @@ const Posts = ({ setPostData, PostData }) => {
       <div>
         <h1>{"Recent Posts"}</h1>
       </div>
-      {PostData.map((post, index) => (
+      {state.map((post, index) => (
         <div key={index}>
           <div className="post-title">{post.title}</div>
           <div className="post-body">{post.body}</div>

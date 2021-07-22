@@ -1,7 +1,10 @@
 import "../CSS/PostForm.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AppContext } from "../App";
 
-const PostForm = ({ addPost }) => {
+const PostForm = () => {
+  const [state, dispatch] = useContext(AppContext);
+
   const [formData, setFormData] = useState({
     title: "",
     body: "",
@@ -16,7 +19,7 @@ const PostForm = ({ addPost }) => {
 
   const handlePostIt = (ev) => {
     ev.preventDefault();
-    addPost(formData);
+    dispatch({ type: "NEW_POST", payload: formData });
     setFormData({ title: "", body: "" });
   };
 
