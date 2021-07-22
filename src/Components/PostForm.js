@@ -1,11 +1,13 @@
 import "../CSS/PostForm.css";
 import { useState } from "react";
+import { connect } from "react-redux";
+import { object } from "prop-types";
+import { createNewPost } from "../actions/postActions";
 
-const PostForm = ({ addPost }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    body: "",
-  });
+const initialFormState = { title: "", body: "" };
+
+const PostForm = ({ createNewPost }) => {
+  const [formData, setFormData] = useState(initialFormState);
 
   const handleChange = (ev) => {
     setFormData({
@@ -16,8 +18,8 @@ const PostForm = ({ addPost }) => {
 
   const handlePostIt = (ev) => {
     ev.preventDefault();
-    addPost(formData);
-    setFormData({ title: "", body: "" });
+    createNewPost(formData);
+    setFormData(initialFormState);
   };
 
   return (
@@ -40,4 +42,6 @@ const PostForm = ({ addPost }) => {
   );
 };
 
-export default PostForm;
+const mapStateToProps = (state) => ({});
+
+export default connect(mapStateToProps, { createNewPost })(PostForm);

@@ -1,11 +1,16 @@
 import "../CSS/Post.css";
 import { useEffect } from "react";
+import { func, array, object } from "prop-types";
+import { connect } from "react-redux";
+import { fetchPosts } from "../actions/postActions";
 
-const Posts = ({ setPostData, PostData }) => {
+const Posts = ({ posts, fetchPosts }) => {
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
-      .then((data) => setPostData(data));
+      .then((posts) => {
+        fetchPosts(posts);
+      });
   }, []);
 
   return (
@@ -13,7 +18,7 @@ const Posts = ({ setPostData, PostData }) => {
       <div>
         <h1>{"Recent Posts"}</h1>
       </div>
-      {PostData.map((post, index) => (
+      {posts.map((post, index) => (
         <div key={index}>
           <div className="post-title">{post.title}</div>
           <div className="post-body">{post.body}</div>
@@ -23,4 +28,12 @@ const Posts = ({ setPostData, PostData }) => {
   );
 };
 
-export default Posts;
+Posts.propTypes = {
+  posts: array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  posts: state.posts.items,
+});
+
+export default connect(mapStateToProps, { fetchPosts })(Posts);
