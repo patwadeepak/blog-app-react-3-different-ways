@@ -1,3 +1,4 @@
+import React from "react";
 import "../CSS/Post.css";
 import { useEffect, useContext } from "react";
 import { AppContext } from "../App";
@@ -6,7 +7,7 @@ const Posts = () => {
   const [state, dispatch] = useContext(AppContext);
 
   useEffect(() => {
-    fetch("http://jsonplaceholder.typicode.com/posts")
+    fetch("https://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
       .then((posts) => {
         dispatch({ type: "FETCH_POSTS", payload: posts });

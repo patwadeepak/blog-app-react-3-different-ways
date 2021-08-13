@@ -1,3 +1,4 @@
+import React from "react";
 import "../CSS/PostForm.css";
 import { useState, useContext } from "react";
 import { AppContext } from "../App";
