@@ -1,9 +1,10 @@
+import React from "react";
 import "../CSS/PostForm.css";
 import { useState, useContext } from "react";
 import { AppContext } from "../App";
 
 const PostForm = () => {
-  const [state, dispatch] = useContext(AppContext);
+  const store = useContext(AppContext);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -19,7 +20,7 @@ const PostForm = () => {
 
   const handlePostIt = (ev) => {
     ev.preventDefault();
-    dispatch({ type: "NEW_POST", payload: formData });
+    store.edit((draft) => draft.posts.unshift(formData));
     setFormData({ title: "", body: "" });
   };
 
