@@ -1,27 +1,22 @@
+import React from "react";
 import Posts from "./Components/Posts";
 import PostForm from "./Components/PostForm";
-import { useEffect, createContext, useReducer } from "react";
-
-const appReducer = (state, action) => {
-  switch (action.type) {
-    case "FETCH_POSTS":
-      return [...state, ...action.payload];
-    case "NEW_POST":
-      return [action.payload, ...state];
-    default:
-      return state;
-  }
-};
+import { createContext } from "react";
+import { useStore } from "@lauf/store-react";
 
 export const AppContext = createContext();
 
+const INITIAL_STATE = {
+  posts: [],
+};
+
 const App = () => {
-  const [state, dispatch] = useReducer(appReducer, []);
+  const store = useStore(INITIAL_STATE);
 
   return (
-    <AppContext.Provider value={[state, dispatch]}>
+    <AppContext.Provider value={store}>
       <div className="app-container">
-        <h1>Blog Post App using Old ways of Redux</h1>
+        <h1>Blog Post App using Lauf Store</h1>
         <PostForm />
         <Posts />
       </div>
