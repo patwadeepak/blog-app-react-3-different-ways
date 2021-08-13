@@ -1,3 +1,4 @@
+import React from "react";
 import Posts from "./Components/Posts";
 import PostForm from "./Components/PostForm";
 import { useEffect, createContext, useReducer } from "react";
